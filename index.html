@@ -1,92 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacktoberfest - Developer Profile Card Showcase</title>
+    <title>Animated Login & Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #a8c0ff, #e0c3fc);
+            transition: background 0.5s ease-in-out;
+        }
+        .container {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            background: white;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .left, .right {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: transform 0.5s ease-in-out, background 0.5s ease-in-out;
+            position: absolute;
+            height: 100%;
+        }
+        .left {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            left: 0;
+            z-index: 2;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .left h2, .left p {
+            margin-bottom: 15px;
+        }
+        .right {
+            padding: 20px;
+            right: 0;
+            background: white;
+            z-index: 1;
+        }
+        .form {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            position: absolute;
+        }
+        .form h2 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .social-login a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            color: rgb(253, 253, 253);
+            font-size: 20px;
+            text-decoration: none;
+            transition: 0.3s ease-in-out;
+        }
+        .google { background: #db4437; }
+        .github { background: #333; }
+        .linkedin { background: #0077b5; }
+        .social-login a:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+        .or-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin: 10px 0;
+        }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+        .or-divider::before,
+        .or-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px dashed #888;
+            margin: 0 10px;
+        }
 
-    <link rel="stylesheet" href="css/style.css">
+        input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0px 0px 10px rgba(37, 117, 252, 0.5);
+        }
+        button {
+            padding: 12px;
+            border: none;
+            background: #2575fc;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+        button:hover {
+            background: #1a5bb8;
+            transform: scale(1.05);
+        }
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .shift-left {
+            transform: translateX(-100%);
+        }
+        .shift-right {
+            transform: translateX(100%);
+        }
+    </style>
 </head>
-
 <body>
-    <div class="background-aurora"></div>
-
-    <div class="container">
-        <nav class="navbar">
-            <h2 class="logo">Profile Showcase</h2>
-            <div class="nav-links">
-                <a href="https://github.com/dsawithaditi/Hacktoberfest2025" target="_blank" class="nav-link">
-                    <i class="ri-github-fill"></i> GitHub Repo
-                </a>
-                <a href="https://github.com/dsawithaditi/Hacktoberfest2025#how-to-contribute" target="_blank"
-                    class="nav-cta">
-                    Contribute <i class="ri-arrow-right-line"></i>
-                </a>
-            </div>
-        </nav>
-
-        <header class="hero">
-            <div class="hero-content">
-                <h1>The Contributor Gallery</h1>
-                <p class="subtitle">A showcase of creative developer profile cards from the open-source community. Built
-                    for Hacktoberfest 2025.</p>
-                <a href="https://github.com/dsawithaditi/Hacktoberfest2025#how-to-contribute" target="_blank"
-                    class="hero-cta">Start Contributing Today</a>
-            </div>
-        </header>
-
-        <main>
-            <div class="search-container">
-                <i class="ri-search-line"></i>
-                <input type="text" id="search-input" placeholder="Search by name, bio, or tags (e.g., minimalist)...">
-            </div>
-
-            <div id="contributors-container">
-            </div>
-            <div id="sentinel"></div>
-            <div id="loader"></div>
-            <p id="no-results" class="no-results-message">No contributors found matching your search.</p>
-        </main>
-    </div>
-
-    <div id="modal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="modal-close" class="modal-close-button">&times;</button>
-            <div id="modal-iframe-container"></div>
-            <div id="modal-info"></div>
+    <div class="container" id="container">
+        <div class="left" id="left">
+            <h2 id="welcomeText">Welcome Back!</h2>
+            <p id="descText">Login to continue your journey.</p>
+            <button id="toggleBtn">Sign Up</button>
         </div>
-    </div>
-
-    <div id="preview-modal" class="modal-overlay">
-        <div class="preview-modal-content">
-            <div class="preview-modal-header">
-                <h3>Device Preview</h3>
-                <div id="device-controls" class="device-controls">
-                    <button data-device="mobile" title="Mobile View"><i class="ri-smartphone-line"></i></button>
-                    <button data-device="tablet" title="Tablet View"><i class="ri-tablet-line"></i></button>
-                    <button data-device="desktop" class="active" title="Desktop View"><i
-                            class="ri-computer-line"></i></button>
+        <div class="right" id="right">
+            <form id="loginForm" class="form active" action="/login" method="POST">
+                <h2>Login</h2>
+                <div class="social-login">
+                    <a href="#" class="google"><i class="fab fa-google"></i></a>
+                    <a href="#" class="github"><i class="fab fa-github"></i></a>
+                    <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
                 </div>
-                <button id="preview-modal-close" class="modal-close-button">&times;</button>
-            </div>
-            <div id="preview-iframe-container" class="preview-iframe-container view-desktop">
-                <iframe id="preview-iframe"></iframe>
-            </div>
-            <div class="preview-modal-footer">
-                <a href="#" id="preview-cta" target="_blank" class="hero-cta">
-                    Go to Live Project <i class="ri-external-link-line"></i>
-                </a>
-            </div>
+                <p class="or-divider">or login using your credentials</p>
+                <input type="text" placeholder="Username" required>
+                <input type="password" placeholder="Password" required>
+                <button id= "loginBtn" type="submit">Login</button>
+            </form>
+            <form id="signupForm" class="form hidden" action="/signup" method="POST">
+                <h2>Sign Up</h2>
+                <input type="text" placeholder="Username" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button id="signupBtn" type="submit">Sign Up</button>
+            </form>
         </div>
     </div>
+    <script>
+        const toggleBtn = document.getElementById('toggleBtn');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const welcomeText = document.getElementById('welcomeText');
+        const descText = document.getElementById('descText');
+        const left = document.getElementById('left');
+        const right = document.getElementById('right');
+        const body = document.body;
 
-    <script src="js/main.js"></script>
+
+        toggleBtn.addEventListener('click', () => {
+            if (loginForm.classList.contains('active')) {
+                loginForm.classList.remove('active');
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+                signupForm.classList.add('active');
+                welcomeText.textContent = 'Join Us!';
+                descText.textContent = 'Create an account to get started.';
+                toggleBtn.textContent = 'Login';
+                left.classList.add('shift-right');
+                right.classList.add('shift-left');
+                left.style.background = 'linear-gradient(135deg, #ff7eb3, #ff758c)';
+                body.style.background = 'linear-gradient(135deg, #fbc2eb, #a6c1ee)';
+                signupBtn.style.background = '#fa5570';
+                signupBtn.style.boxShadow = '0px 0px 10px rgba(255, 117, 140, 0.5)';
+                toggleBtn.style.background = '#fa5570';
+            } else {
+                signupForm.classList.remove('active');
+                signupForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+                loginForm.classList.add('active');
+                welcomeText.textContent = 'Welcome Back!';
+                descText.textContent = 'Login to continue your journey.';
+                toggleBtn.textContent = 'Sign Up';
+                left.classList.remove('shift-right');
+                right.classList.remove('shift-left');
+                left.style.background = 'linear-gradient(135deg, #6a11cb, #2575fc)';
+                body.style.background = 'linear-gradient(135deg, #a8c0ff, #e0c3fc)';
+                loginBtn.style.background = '#2575fc';
+                loginBtn.style.boxShadow = '0px 0px 10px rgba(37, 117, 252, 0.5)';
+                toggleBtn.style.background = '#2575fc';
+            }
+        });
+    </script>
 </body>
-
 </html>
